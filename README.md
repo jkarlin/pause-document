@@ -9,7 +9,7 @@ frameElement.pauseFrame(true /* show play button ux */);
 
 And when you're ready to resume the frame:
 ```javascript
-frameElement.resumeFrame(frameElement);  // does nothing if frame isn't paused
+frameElement.resumeFrame();  // does nothing if frame isn't paused
 ```
 
 # Use Cases
