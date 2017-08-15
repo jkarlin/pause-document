@@ -4,12 +4,12 @@ There are times for frames to be busy, and times when it's wasteful. When it's w
 
 ```javascript
 var frameElement = document.getElementById("hungryFrameId");
-document.pauseFrame(frameElement, true /* show play button ux */);
+frameElement.pauseFrame(true /* show play button ux */);
 ```
 
 And when you're ready to resume the frame:
 ```javascript
-document.resumeFrame(frameElement);  // does nothing if frame isn't paused
+frameElement.resumeFrame(frameElement);  // does nothing if frame isn't paused
 ```
 
 # Use Cases
