@@ -1,4 +1,4 @@
-# Pauisng Frames
+# Pausing Frames
 
 There are times for frames to be busy, and times when it's wasteful. When it's wasteful, a frame should be paused, so that it's not bothering the user. When a frame is paused, it doesn't run script and it doesn't load resources. It just waits patiently to be resumed. 
 
