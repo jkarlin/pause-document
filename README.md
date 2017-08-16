@@ -7,7 +7,7 @@ Pausing may be initiated by conscientious script or by the browser in order to i
 The JavaScript API to pause a frame looks like:
 
 ```javascript
-var frameElement = document.getElementById("hungryFrameId");
+var frameElement = document.getElementById("hungryFrameID");
 frameElement.pause({showUI: true});
 ```
 
