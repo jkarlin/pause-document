@@ -16,13 +16,13 @@ And when you're ready to resume the frame:
 frameElement.resume();  // does nothing if frame isn't paused
 ```
 
-# Use Cases
+## Use Cases
 * Pausing frames that violate policies (e.g., [TransferSizePolicy](https://github.com/WICG/transfer-size)). This provides a gentle, yet firm response to misbehaving frames.
 * Pausing resource-intensive frames that the user isn't currently paying attention to. Why run a game's tight graphics loop while the user is busy reading the instructions in a different frame?
 * As a mechanism for browsers to automatically intervene on resource-intensive frames.
 
 
-# Pausing Details
+## Pausing Details
 When a frame is paused, the browser will:
 
 1. finish any currently executing script, but the rest of the frame's event queue is deferred until the frame is resumed. This means that queued promise resolutions and event firings won't happen until the frame has resumed.
