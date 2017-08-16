@@ -1,6 +1,6 @@
 # Pausing Frames
 
-There are times for frames to be busy, and times when it's wasteful. When it's wasteful, a frame should be paused so that it's not bothering the user. When a frame is paused, it doesn't run script and it doesn't load resources. It waits patiently to be resumed. 
+There are times for frames to be busy, and times when they're wasteful. When they're wasteful, frames should be paused so that they don't both the user. When a frame is paused, it doesn't run script and it doesn't load resources. It waits patiently to be resumed. 
 
 Pausing may be initiated by conscientious script or by the browser in order to intervene on the user's behalf. If initiated by script, it can be resumed by script and optionally by the user (via a play button). If initiated by the browser, it can be resumed by the browser and optionally by the user.
 
