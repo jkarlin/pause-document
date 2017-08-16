@@ -22,7 +22,7 @@ frameElement.resume();  // does nothing if frame isn't paused
 * As a gentle, yet firm mechanism for browsers to automatically intervene on resource-intensive frames.
 
 
-# A bit more about what pausing does
+# Pausing Details
 When a frame is paused, the browser will:
 
 1. finish any currently executing script, but the rest of the frame's event queue is deferred until the frame is resumed. This means that queued promise resolutions and event firings won't happen until the frame has resumed.
