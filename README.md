@@ -1,15 +1,15 @@
-# A pauseFrame API Proposal
+# A PauseFrame API Proposal
 
 There are times for frames to be busy, and times when it's wasteful. When it's wasteful, pause it, so that it's not bothering your user. You, or the user, can easily resume it later.
 
 ```javascript
 var frameElement = document.getElementById("hungryFrameId");
-frameElement.pauseFrame(true /* show play button ux */);
+frameElement.pause(true /* show play button ux */);
 ```
 
 And when you're ready to resume the frame:
 ```javascript
-frameElement.resumeFrame();  // does nothing if frame isn't paused
+frameElement.resume();  // does nothing if frame isn't paused
 ```
 
 # Use Cases
