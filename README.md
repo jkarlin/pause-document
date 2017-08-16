@@ -1,6 +1,10 @@
-# A PauseFrame API Proposal
+# Pauisng Frames
 
-There are times for frames to be busy, and times when it's wasteful. When it's wasteful, pause it, so that it's not bothering your user. You, or the user, can easily resume it later.
+There are times for frames to be busy, and times when it's wasteful. When it's wasteful, a frame should be paused, so that it's not bothering the user. When a frame is paused, it doesn't run script and it doesn't load resources. It just waits patiently to be resumed. 
+
+Pausing may be initiated by conscientious script or by the browser in order to intervene on the user's behalf. If initiated by script, it can be resumed by script and optionally by the user (via a play button). If initiated by the browser, it can be resumed by the browser and optionally by the user.
+
+The JavaScript API to pause a frame looks like:
 
 ```javascript
 var frameElement = document.getElementById("hungryFrameId");
@@ -21,7 +25,7 @@ frameElement.resume();  // does nothing if frame isn't paused
 # A bit more about what pausing does
 When a frame is paused, the browser will:
 
-1. finishes any currently executing script, but the rest of the frame's event queue is deferred until the frame is resumed. This means that queued promise resolutions and event firings won't happen until the frame has resumed.
+1. finish any currently executing script, but the rest of the frame's event queue is deferred until the frame is resumed. This means that queued promise resolutions and event firings won't happen until the frame has resumed.
 
 2. defer any network requests created by the frame until the frame has resumed.
 
