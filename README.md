@@ -16,6 +16,12 @@ And when you're ready to resume the frame:
 frameElement.resume();  // does nothing if frame isn't paused
 ```
 
+To detect if a frame is paused:
+```javascript
+if (frameElement.paused) 
+  alert("The frame is paused");
+```
+
 ## Use Cases
 * Pausing frames that violate policies (e.g., [TransferSizePolicy](https://github.com/WICG/transfer-size)). This provides a gentle, yet firm response to misbehaving frames.
 * Pausing resource-intensive frames that the user isn't currently paying attention to. Why run a game's tight graphics loop while the user is busy reading the instructions in a different frame?
