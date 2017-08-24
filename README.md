@@ -33,7 +33,7 @@ When a frame is paused, the browser will:
 
 1. finish any currently executing script, but the rest of the frame's event queue is deferred until the frame is resumed. This means that queued promise resolutions and event firings won't happen until the frame has resumed.
 
-2. defer any network requests created by the frame until the frame has resumed.
+2. defer any asynchronous network requests created by the frame until the frame has resumed.
 
 3. make it visually obvious to the user that the frame is paused if `showUI` is true. Imagine the frame turning black with a big play button on it. When the user presses the play button, the frame is resumed. If `showUI` is false, no visual change will be made apparent to the user. The frame will just be static and only resumable via script.
 
