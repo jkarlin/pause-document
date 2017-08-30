@@ -8,7 +8,7 @@ The JavaScript API to pause a frame looks like:
 
 ```javascript
 var frameElement = document.getElementById("hungryFrameID");
-frameElement.pause({showUI: true});
+frameElement.pause({userResumable: true});
 ```
 
 And when you're ready to resume the frame:
@@ -35,6 +35,6 @@ When a frame is paused, the browser will:
 
 2. pause any playing animations or video, which will resume when the frame is unpaused
 
-2. make it visually obvious to the user that the frame is paused if `showUI` is true. Imagine the frame turning black with a big play button on it. When the user presses the play button, the frame is resumed. If `showUI` is false, no visual change will be made apparent to the user. The frame will just be static and only resumable via script.
+2. make it visually obvious to the user that the frame is paused if `userResumable` is true. Imagine the frame turning black with a big play button on it. When the user presses the play button, the frame is resumed. If `userResumable` is false, no visual change will be made apparent to the user. The frame will just be static and only resumable via script.
 
 
