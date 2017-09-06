@@ -24,7 +24,7 @@ if (frameElement.paused)
 
 ## Use Cases
 * Pausing frames that violate policies (e.g., [TransferSizePolicy](https://github.com/WICG/transfer-size)). This provides a gentle, yet firm response to misbehaving frames.
-* Pausing resource-intensive frames that the user isn't currently paying attention to. Why run a game's tight graphics loop while the user is busy reading the instructions in a different frame?
+* Pausing resource-intensive frames that the user isn't currently paying attention to. For instance, a carousel of frames, where some of the frames are offscreen.
 * As a mechanism for browsers to automatically intervene on resource-intensive frames.
 
 
