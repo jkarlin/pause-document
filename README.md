@@ -2,13 +2,13 @@
 
 There are times for frames to be busy, and times when the work they're doing is wasteful. When they're wasteful, frames should be paused so that they don't bother the user. When a frame is paused, it completes its current tasks and resource loads but doesn't run any further tasks (e.g., event handlers, promises resolving, video loops) until the frame is resumed. 
 
-Pausing may be initiated by conscientious script or by the browser in order to intervene on the user's behalf. If initiated by script, it can be resumed by script and optionally by the user (via a play button). If initiated by the browser, it can be resumed by the browser and optionally by the user.
+Pausing may be initiated by conscientious script or by the browser in order to intervene on the user's behalf. If initiated by script, it can be resumed by script. If initiated by the browser as part of an intervention, it can only be resumed by the browser. 
 
 The JavaScript API to pause a frame looks like:
 
 ```javascript
 var frameElement = document.getElementById("hungryFrameID");
-frameElement.pause({userResumable: true});
+frameElement.pause();
 ```
 
 And when you're ready to resume the frame:
@@ -34,7 +34,4 @@ When a frame is paused, the browser will:
 1. finish any currently executing script, but the rest of the frame's event queue is deferred until the frame is resumed. This means that queued promise resolutions and event firings won't happen until the frame has resumed.
 
 2. pause any playing animations or video, which will resume when the frame is unpaused
-
-2. make it visually obvious to the user that the frame is paused if `userResumable` is true. Imagine the frame turning black with a big play button on it. When the user presses the play button, the frame is resumed. If `userResumable` is false, no visual change will be made apparent to the user. The frame will just be static and only resumable via script.
-
 
