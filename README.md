@@ -27,11 +27,10 @@ if (frameElement.paused)
 * Pausing resource-intensive frames that the user isn't currently paying attention to. For instance, a carousel of frames, where some of the frames are offscreen.
 * As a mechanism for browsers to automatically intervene on resource-intensive frames.
 
+## UX Considerations
+The user is likely to become confused by the frame becoming a static image. E.g., clicking on links won't work. It is therefore advisable that if you pause a visible frame that you make it visually obvious to the user that it's not interactive (e.g., overlay a semi-transparent play button over the paused frame).
 
 ## Pausing Details
-When a frame is paused, the browser will:
+When a frame is paused, the frame effectively becomes a static image. Therefore any animated images or media elemnents must pause. No javascript events (e.g., onload, onclick) are fired, and no default handlers (e.g., navigating on a click) are fired within the paused frame. Instead, the events will be queued. Further, while paused, the frame will not navigate (e.g., meta refresh will not work), CSS animations won't run, and neither will `requestAnimationFrame` callbacks. 
 
-1. finish any currently executing script, but the rest of the frame's event queue is deferred until the frame is unpaused. This means that queued promise resolutions and event firings won't happen until the frame has unpaused.
-
-2. pause any playing animations or video, which will resume when the frame is unpaused
 
