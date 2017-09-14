@@ -33,7 +33,8 @@ if (frameElement.paused)
 The user is likely to become confused by the frame becoming a static image. E.g., clicking on links won't work. It is therefore advisable that if you pause a visible frame that you (the web developer) make it visually obvious to the user that it's not interactive (e.g., overlay a semi-transparent play button over the paused frame).
 
 ## Pausing Details
-When a frame is paused, the frame effectively becomes a static image. Any animated images or media elements pause. No javascript events (e.g., onload, onclick) are fired, and no default handlers (e.g., navigating on a click) are fired within the paused frame. Instead, the events will be queued. Further, while paused, the frame will not navigate (e.g., meta refresh will not work), CSS animations won't run, and the frame won't render, therefore there are no  `requestAnimationFrame` (rAF) callbacks. 
+When a frame is paused, it (and its child frames which are transitively paused) effectively becomes a static image. Any animated images or media elements pause. No javascript events (e.g., onload, onclick) are fired, no tasks are run, and no default handlers (e.g., navigating on a click) are fired within the paused frame. Instead, the events will be queued. Further, while paused, the frame will not navigate (e.g., meta refresh will not work), CSS animations won't run, and the frame won't render, therefore there are no  `requestAnimationFrame` (rAF) callbacks.
 
 There are a few times that the frame might need to be rerendered (e.g., on frame resize or the browser dropped a texture while the frame was offscreen). When that happens, the frame will be rendered once, and rAF will correspondingly be called once beforehand.
+
 
