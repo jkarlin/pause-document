@@ -8,12 +8,14 @@ The JavaScript API to pause a frame looks like:
 
 ```javascript
 var frameElement = document.getElementById("hungryFrameID");
-frameElement.pause();
+await frameElement.pause();
+console.log("Frame is paused");
 ```
 
 And when you're ready to unpause the frame:
 ```javascript
-frameElement.unpause();  // does nothing if frame isn't paused
+await frameElement.unpause();  // does nothing if frame isn't paused
+console.log("Frame is unpaused");
 ```
 
 To detect if a frame is paused:
