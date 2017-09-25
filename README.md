@@ -48,7 +48,7 @@ For same-origin frames, `frameElement.paused` will return true if the sum of the
 ## Behavior of a Paused Frame
 A paused frame behaves like a static image. Any animated images or media elements pause. No future javascript events (e.g., onload, onclick) are fired, no enqueued tasks are run, and no default handlers (e.g., navigating on a click) are fired within the paused frame. Instead, the events will be queued. Further, while paused, the frame will not navigate (e.g., meta refresh will not work), CSS animations won't run, and the frame won't render, therefore there are no  `requestAnimationFrame` (rAF) callbacks.
 
-There are a few times that the frame might need to be rerendered (e.g., on frame resize or the browser dropped a texture while the frame was offscreen). When that happens, the frame will be rendered once, and rAF will correspondingly be called once beforehand.
+There are a few times that the frame might need to be rerendered (e.g., on frame resize or scrolling). When that happens, the frame will be rendered again, and rAF will be fired, as needed.
 
 
 ## Privacy Issues
