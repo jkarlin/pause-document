@@ -35,12 +35,22 @@ if (frameElement.paused)
 The user is likely to become confused by the frame becoming a static image. E.g., clicking on links won't work. It is therefore advisable that if you pause a visible frame that you (the web developer) make it visually obvious to the user that it's not interactive (e.g., overlay a semi-transparent play button over the paused frame).
 
 # Pause Details
-When a frame is paused (either for intervention or via API), the frame and its descendants will increment their new `pausedCounter` member. Any frame whose `pauseCounter` value is greater than zero are paused, and behave like a static image. Any animated images or media elements pause. No future javascript events (e.g., onload, onclick) are fired, no enqueued tasks are run, and no default handlers (e.g., navigating on a click) are fired within the paused frame. Instead, the events will be queued. Further, while paused, the frame will not navigate (e.g., meta refresh will not work), CSS animations won't run, and the frame won't render, therefore there are no  `requestAnimationFrame` (rAF) callbacks.
+Each frame will have a `pausedCounterUA` and a `pausedCounterAPI` member, which initialize to zero and may never drop below zero. When the sum of the two members is zero, the frame is unpaused, else paused.
+
+When `pause` is called on a frame by the API, `pausedCounterAPI` is incremented in the frame and in its descendant frames. When a frame is paused by the UA, `pausedCounterUA` is incremented in the frame and its descendant frames.
+
+# Unpause Details
+When `unpause` is called on a frame by the API, `pausedCounterAPI` is decremented for the frame and its descendants. If the counter is already zero, it is not decremented. Likewise, if the frame is unpaused by UA, the `pausedCounterUA` is decremented in the frame and its descendants, not to go below zero.
+
+# Paused details
+For same-origin frames, `frameElement.paused` will return true if the sum of the frame's `pausedCounterUA` and `pausedCounterAPI` is greater than zero. For cross-origin frames, `frameElement.paused` will return true if `pausedCounterAPI` is greater than zero. This is to ensure that intervention information about a cross-origin frame is not leaked.
+
+# Behavior of a Paused Frame
+A paused frame behaves like a static image. Any animated images or media elements pause. No future javascript events (e.g., onload, onclick) are fired, no enqueued tasks are run, and no default handlers (e.g., navigating on a click) are fired within the paused frame. Instead, the events will be queued. Further, while paused, the frame will not navigate (e.g., meta refresh will not work), CSS animations won't run, and the frame won't render, therefore there are no  `requestAnimationFrame` (rAF) callbacks.
 
 There are a few times that the frame might need to be rerendered (e.g., on frame resize or the browser dropped a texture while the frame was offscreen). When that happens, the frame will be rendered once, and rAF will correspondingly be called once beforehand.
 
-# Unpause Details
-When a frame is unpaused, it, and its descendants decrement their `pausedCounter` member. If the counter reaches 0 the frame is unpaused. The queues resuming running their tasks and the frame resumes rendering as normal.
 
-# Paused details
-`frameElement.paused` will return true if the frame's `pausedCounter` member is greater than 0. Since frames paused by either the API or UA intervention increment the `pausedCounter` member, it is possible to discover that a frame was paused by the UA. This allows for transparency to developers about the UA's intervention.
+# Privacy Issues
+
+1. Pausing a frame causes it to stop processing. Measuring task responsiveness before and after pausing may help the embedding page to determine the CPU load of a cross-origin frame at a given moment. This could already be accomplished by measuing the load before and after unloading the frame. But this is less intrusive.
