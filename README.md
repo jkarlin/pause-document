@@ -46,11 +46,9 @@ When `unpause` is called on a frame by the API, `pausedCounterAPI` is decremente
 For same-origin frames, `frameElement.paused` will return true if the sum of the frame's `pausedCounterUA` and `pausedCounterAPI` is greater than zero. For cross-origin frames, `frameElement.paused` will return true if `pausedCounterAPI` is greater than zero. This is to ensure that intervention information about a cross-origin frame is not leaked.
 
 ## Behavior of a Paused Frame
-A paused frame behaves like a static image. Any animated images or media elements pause. No future javascript events (e.g., onload, onclick) are fired, no enqueued tasks are run, and no default handlers (e.g., navigating on a click) are fired within the paused frame. Instead, the events will be queued. Further, while paused, the frame will not navigate (e.g., meta refresh will not work), CSS animations won't run, and the frame won't render, therefore there are no  `requestAnimationFrame` (rAF) callbacks.
-
-There are a few times that the frame might need to be rerendered (e.g., on frame resize or scrolling). When that happens, the frame will be rendered again, and rAF will be fired, as needed.
+A paused frame behaves like a static image. Any animated images or media elements pause. Scrolling of the frame is disabled. Future javascript events are either queued or discarded (e.g., mouse events are dropped, lifecycle events such as load are queued).  Timers are either queued (setTimeout) or discarded (setInterval). Further, while paused, the frame will not navigate (e.g., meta refresh will not work), and the frame won't render unless necessary (e.g., frame resize or page scrolling). rAF will fire for each rendered frame.
 
 
 ## Privacy Issues
 
-1. Pausing a frame causes it to stop processing. Measuring task responsiveness before and after pausing may help the embedding page to determine the CPU load of a cross-origin frame at a given moment. This could already be accomplished by measuing the load before and after unloading the frame. But this is less intrusive.
+1. Pausing a frame causes it to stop processing. Measuring task responsiveness before and after pausing may help the embedding page to determine the CPU or network load of a cross-origin frame at a given moment. This could already be accomplished by measuing the load before and after unloading the frame. But this is less intrusive.
