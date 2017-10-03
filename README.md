@@ -49,6 +49,8 @@ For same-origin frames, `frameElement.paused` will return true if the sum of the
 A paused frame behaves like a static image. Any animated images or media elements pause. Scrolling of the frame is disabled. Future javascript events are either queued or discarded (e.g., mouse events are dropped, lifecycle events such as load are queued).  Timers are either queued (setTimeout) or discarded (setInterval). Further, while paused, the frame will not navigate (e.g., meta refresh will not work), and the frame won't render unless necessary (e.g., frame resize or page scrolling). rAF will fire for each rendered frame.
 
 
-## Privacy Issues
+## Privacy Issues 
 
 1. Pausing a frame causes it to stop processing. Measuring task responsiveness before and after pausing may help the embedding page to determine the CPU or network load of a cross-origin frame at a given moment. This could already be accomplished by measuing the load before and after unloading the frame. But this is less intrusive.
+
+2. The embedding page now has the ability to freeze the rendered output of a cross-origin frame at any point. Perhaps the cross-origin frame wants something to be displayed momentarily but now it's made permanent. Might this be used for nefarious purposes by the embedder?
