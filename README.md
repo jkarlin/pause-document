@@ -46,7 +46,7 @@ When `unpause` is called on a frame by the API, `pausedCounterAPI` is decremente
 For same-origin frames, `frameElement.paused` will return true if the sum of the frame's `pausedCounterUA` and `pausedCounterAPI` is greater than zero. For cross-origin frames, `frameElement.paused` will return true if `pausedCounterAPI` is greater than zero. This is to ensure that intervention information about a cross-origin frame is not leaked.
 
 ## Behavior of a Paused Frame
-A paused frame behaves like a static image. Any animated images or media elements pause. Scrolling of the frame is disabled. Future javascript events are either queued or discarded (e.g., mouse events are dropped, lifecycle events such as load are queued).  Timers are either queued (setTimeout) or discarded (setInterval). Further, while paused, the frame will not navigate (e.g., meta refresh will not work), and the frame won't render unless necessary (e.g., frame resize or page scrolling). rAF will fire for each rendered frame.
+A paused frame behaves like a static image. Any animated images or media elements pause. Scrolling of the frame is disabled. Future javascript events are either queued or discarded (e.g., UI events such as mouse or keyboard are dropped, the rest are queued). Timers are either queued (setTimeout) or discarded (setInterval). Further, while paused, the frame will not navigate (e.g., meta refresh will not work), and the frame won't render unless necessary (e.g., frame resize or page scrolling). rAF will fire for each rendered frame.
 
 
 ## Privacy Issues 
