@@ -34,7 +34,7 @@ When loading is paused, existing loads will continue but new resource requests (
 When rendering is paused, the frame will stop its rendering pipeline and will continue to show the results of the last paint. The browser may, if necessary, rerender the frame (e.g., because the frame is resized or the frame buffers were dropped while offscreen and it scrolled back into view). The rAF event is only fired when the browser needs to rerender. 
 
 ## Pausing Script
-When script is paused, any running script task is completed and future tasks on the event queue (e.g., events (including WebSocket) and timers) remain queued until the document is unpaused. UI events are discarded instead of queued since there can be so many of them. rAF will continue to fire unless rendering is also paused.
+When script is paused, any running script task is completed and future tasks for the given frame on the event queue (e.g., events [including WebSocket] and timers) remain queued until the document is unpaused. UI events are discarded instead of queued since there can be so many of them. rAF will continue to fire unless rendering is also paused.
 
 ## Use Cases
 * Pausing frames that violate policies (e.g., [TransferSizePolicy](https://github.com/WICG/transfer-size)). You might want to stop the frame from loading anymore resources, or stop it from doing any work. This provides a gentle, yet firm response to misbehaving frames.
